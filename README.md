@@ -63,3 +63,23 @@ function todoApp(previousState = initialState, action) {
   return previousState;
 }
 ```
+
+#### 함수들
+
+- createStore(reducer함수명)
+  - store를 생성
+- store.getState()
+  - 현재 state 리턴
+- store.dispatch(액션객체=액션생성자함수())
+  - state값 변경
+
+ex.
+const store=createStore(todoApp)
+store.dispatch(addTodo('바꾸고자하는 데이터'))
+
+- store.subscribe(()=>{})
+  - store의 state가 변경되는 것을 감지하는 함수. 해당 함수의 리턴값은 unsubscribe
+- unsubscribe()
+  - 더이상 변경 감지 안 함
+- store.replaceReducer()
+  - 원래 리듀서를 다른 리듀서로 바꿈. 실무에서 잘 쓰이지 않음
