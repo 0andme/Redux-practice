@@ -1,17 +1,23 @@
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 import { addTodo } from "../redux/actions";
-import useReduxDispatch from "../hooks/useReduxDispatch";
-function TodoForm() {
+function TodoForm({ add }) {
   const inputRef = useRef();
-  const dispatch = useReduxDispatch();
   return (
     <div>
       <input ref={inputRef} /> <button onClick={click}>추가</button>
     </div>
   );
   function click() {
-    dispatch(addTodo(inputRef.current.value));
+    add(inputRef.current.value);
   }
 }
 
-export default TodoForm;
+export default connect(
+  (state) => ({}),
+  (dispatch) => ({
+    add: (text) => {
+      dispatch(addTodo(text));
+    },
+  })
+)(TodoForm);
