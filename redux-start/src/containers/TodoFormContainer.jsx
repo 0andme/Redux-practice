@@ -1,14 +1,17 @@
-import { connect } from "react-redux";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/actions";
 import TodoForm from "../components/TodoForm";
 
-const todoFormContainer = connect(
-  (state) => ({}),
-  (dispatch) => ({
-    add: (text) => {
+function TodoFormContainer() {
+  const dispatch = useDispatch();
+  const add = useCallback(
+    (text) => {
       dispatch(addTodo(text));
     },
-  })
-)(TodoForm);
+    [dispatch]
+  );
 
-export default todoFormContainer;
+  return <TodoForm add={add} />;
+}
+export default TodoFormContainer;
